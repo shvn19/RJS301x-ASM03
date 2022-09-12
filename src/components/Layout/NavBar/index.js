@@ -7,7 +7,7 @@ export const NavBar = () => {
         <NavLink to={"/"} className='px-4 py-2 text-color-nav-home bg-red-50 inline italic text-xl'>
           Home 
         </NavLink>
-        <NavLink to={"/"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
+        <NavLink to={"/shop"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
           Shop
         </NavLink>
       </div>
