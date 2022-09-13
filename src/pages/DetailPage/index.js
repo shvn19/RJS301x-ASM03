@@ -5,6 +5,7 @@ import { priceTransform } from "../../helpers";
 import { PreviewImages } from "./PreviewImages";
 import styled from 'styled-components';
 import { getAllProductsFunc } from "../../redux/store/products-slice";
+import { RelatedProducts } from "./RelatedProduct";
 
 const InputNoArrow = styled.input`
 ::-webkit-inner-spin-button{
@@ -19,6 +20,7 @@ const InputNoArrow = styled.input`
 
 export const DetailPage = () => {
   const productId = useParams();
+  const [relProducts, setRelProducts] = useState([]);
   console.log('prid: ', productId.id);
   const [prd, setPrd] = useState();
   let products = useSelector(state => state.products.productsList);
@@ -42,6 +44,16 @@ export const DetailPage = () => {
     console.log('res: ',res);
     setPrd(res[0]);
   },[dispatch, products]);
+
+  useEffect(() => {
+    console.log('product before filter: ', products);
+    console.log('prd: ', prd);
+    if (products.length!=0 && prd) {
+      const res = products.filter(prod=>prod.category==prd.category);
+      console.log('related products list: ', res);
+      setRelProducts(res);
+    }
+  },[prd, products]);
   
   const handleChangeInput = (event) => {
     setQuantity(+event.target.value);
@@ -97,33 +109,20 @@ export const DetailPage = () => {
       </div>
       {/* Description  */}
       <div className={`mt-12 italic flex flex-col gap-6 w-2/3`}>
-        <button className="px-8 py-4 bg-color-primary text-white">Description</button>
+        <button className="px-8 py-4 bg-color-primary text-white w-[300px]">Description</button>
         <p className={`text-color-primary`}>
           PRODUCT DESCRIPTION
         </p>
-        <p className={`whitespace-pre text-slate-400`}>
+        <p className={`whitespace-pre-line text-slate-400 break-all`}>
           {prd?.long_desc}
         </p>
       </div>
       <div className={`mt-12 flex flex-col gap-6 w-2/3`}>
-        <p className={``}>
+        <p className={`text-xl font-normal italic`}>
           RELATED PRODUCT
         </p>
-        <div className={`grid grid-cols-4`}>
-          {console.log('products1: ', products)}
-          {products.length!=0 && products.filter(prd => prd.category==productId.category).map(prod => (
-            <div className={`flex flex-col`}>
-              <img src={prod.img1} alt={prod.name}/>
-              <p className={``}>
-                {prod.name}
-              </p>
-              <p className={``}>
-                {`${priceTransform(prod.price)} VNĐ`}
-              </p>
-            </div>
-          ))}
-        </div>
-          
+        {console.log('products1: ', products)}
+        {relProducts.length!=0 && <RelatedProducts products={relProducts}/> }
       </div>
     </div>
   )
