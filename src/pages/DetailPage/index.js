@@ -72,10 +72,10 @@ export const DetailPage = () => {
   }
   return (
     <div className={`px-[100px] py-12`}>
-      <div className={`grid grid-cols-2 gap-4`}>
+      <div className={`grid grid-cols-2 gap-10`}>
         {prd&&<PreviewImages product={prd} />}
         {prd&&<div className={`flex flex-col gap-4 italic`}>
-          <p className={`font-bold text-4xl text-color-primary`}>
+          <p className={`font-bold text-4xl text-gray-500`}>
             {prd?.name}
           </p>
           <p className={`text-xl text-slate-500`}>

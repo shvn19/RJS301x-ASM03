@@ -5,7 +5,7 @@ export const RelatedProducts = ({ products }) => {
     <div className={`grid grid-cols-4 gap-6`}>
       {console.log('into related products ...')}
       {products.map(prod => (
-        <div className={`flex flex-col gap-3 italic text-center`}>
+        <div key={prod._id.$oid} className={`flex flex-col gap-3 italic text-center`}>
           {console.log('prod in loop: ', prod)}
           <img src={prod.img1} alt={prod.name}/>
           <p className={`font-bold text-slate-500`}>
