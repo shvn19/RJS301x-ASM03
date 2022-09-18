@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Auth } from 'aws-amplify';
 
 const initialState = {
-  user: [],
+  user: {},
 }
 
 const authSlice = createSlice({
@@ -11,6 +11,7 @@ const authSlice = createSlice({
   reducers: {
     signin(state,action) {
       console.log('action: ', action);
+      state.user = action.payload
     },
     signout(state) {
 
