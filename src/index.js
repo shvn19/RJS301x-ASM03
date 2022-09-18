@@ -6,6 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/lib/integration/react';
+import { Amplify, Auth } from 'aws-amplify';
+
+Amplify.configure({
+  Auth: {
+    'userPoolId': 'us-east-2_7SDzK9R3t',
+    'userPoolWebClientId': 'ijgdifnhadrvlkp5f1co0q241',
+  }
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

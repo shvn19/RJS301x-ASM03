@@ -5,6 +5,7 @@ import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
+import authSlice from "./authentication-slice";
 
 const persistConfig = {
   key: "root",
@@ -15,6 +16,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   //only have 1 reducer, can add more reducers follow below pattern
   products: productsSlice.reducer,
+  // add one more reducer is authentication reducer:
+  auth: authSlice.reducer,
 })
 
 const pReducer = persistReducer(persistConfig, rootReducer);
