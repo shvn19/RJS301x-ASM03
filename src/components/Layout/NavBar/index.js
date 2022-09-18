@@ -19,8 +19,8 @@ export const NavBar = () => {
         <NavLink to={"/"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
           Cart
         </NavLink>
-        <NavLink to={"/"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
-          Login
+        <NavLink to={"/signup"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
+          Login / Register
         </NavLink>
       </div>
     </div>

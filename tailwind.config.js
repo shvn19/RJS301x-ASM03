@@ -7,7 +7,7 @@ module.exports = {
         'color-nav-home' : '#E5C57F',
         'font-primary' : '#070307',
         'color-primary' : '#111111',
-      }
+      },
     },
   },
   plugins: [],
