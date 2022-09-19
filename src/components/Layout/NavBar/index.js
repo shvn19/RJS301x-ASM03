@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
+import { UserPanel } from "./UserPanel";
 
 export const NavBar = () => {
+  const activeUser = useSelector(state=>state.auth.activeUser);
+
   return (
     <div className="mx-[100px] w-[calc(100%-200px)] bg-blue-50 grid grid-cols-3 ">
       <div className="flex justify-start">
@@ -19,9 +23,12 @@ export const NavBar = () => {
         <NavLink to={"/"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
           Cart
         </NavLink>
-        <NavLink to={"/signup"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
-          Login / Register
-        </NavLink>
+        {activeUser.name?<UserPanel activeUser={activeUser}/>:
+          (<NavLink to={"/signup"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
+            <span>Login / Register</span>
+          </NavLink>)
+        }
+        
       </div>
     </div>
   )

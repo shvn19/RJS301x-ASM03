@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Auth } from 'aws-amplify';
 
 const initialState = {
-  user: {},
+  activeUser: {},
 }
 
 const authSlice = createSlice({
@@ -11,10 +11,16 @@ const authSlice = createSlice({
   reducers: {
     signin(state,action) {
       console.log('action: ', action);
-      state.user = action.payload
+      const { sub, email, name, phone } = action.payload.attributes;
+      state.activeUser = {
+        sub,
+        email,
+        name,
+        phone,
+      };
     },
     signout(state) {
-
+      state.activeUser={};
     },
     signup(state) {
 
@@ -27,13 +33,11 @@ export const userSignIn = (data) => {
     try {
       console.log('in signin: data ...', data);
       const res = await Auth.signIn(
-        // 'shvn19@gmail.com',
-        // 'ABCabc1!',
         data.email,
         data.password,
       );
       console.log('signin res: ', res);
-      return await dispatch(authSlice.actions.signin(res));
+      dispatch(authSlice.actions.signin(res));
     } catch (err) {
       console.log('signin error: ', err);
     }
@@ -41,7 +45,14 @@ export const userSignIn = (data) => {
 }
 
 export const userSignOut = () => {
-
+  return async (dispatch) => {
+    try {
+      const res = await Auth.signOut();
+      dispatch(authSlice.actions.signOut())
+    } catch (err) {
+      console.log('error signout: ', err);
+    }
+  }
 }
 
 export const userSignUp = (data) => {

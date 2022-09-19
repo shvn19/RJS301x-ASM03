@@ -33,7 +33,7 @@ export const PopUp = () => {
   );
 
   return (
-      <BackDrop className={`flex justify-center items-center transition duration-500`}>
+      <BackDrop className={`flex justify-center items-center transition duration-500 ease-in`}>
         <div ref={refModal} className={`z-50 grid grid-cols-2 gap-6 max-w-[1000px] max-h-[700px] opacity-100 mx-16 my-16 bg-white items-center p-16 rounded-2xl`} 
         >
           <img src={product.img1} alt={product.name} className="w-full max-h-[592px]"/>

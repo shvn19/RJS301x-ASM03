@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { createRoutesFromChildren, NavLink } from "react-router-dom"
+import { createRoutesFromChildren, NavLink, useNavigate } from "react-router-dom"
 import yup, { REGEX_EMAIL } from '../../yupGlobal';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
@@ -34,10 +34,13 @@ export const SignIn = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log('data submitted: ', data);
-    dispatch(userSignIn(data));
+    await dispatch(userSignIn(data));
+    console.log('Sign In successfully!!!');
+    navigate("/");
   }
 
   return (
