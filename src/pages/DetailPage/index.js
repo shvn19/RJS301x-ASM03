@@ -73,7 +73,6 @@ export const DetailPage = () => {
   }
 
   const handleAddToCart = async () => {
-    console.log('start adding ...');
     try{
       dispatch(cartAddProduct(prd,quantity));
     } catch (error) {
