@@ -20,7 +20,7 @@ export const NavBar = () => {
         BOUTIQUE
       </div>
       <div className="flex justify-end">
-        <NavLink to={"/"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
+        <NavLink to={"/cart"} className='px-4 py-2 bg-red-50 inline italic text-xl'>
           Cart
         </NavLink>
         {activeUser.name?<UserPanel activeUser={activeUser}/>:

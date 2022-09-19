@@ -4,7 +4,7 @@ export const priceTransform = (price) => {
   let count = 0;
   for(let i=s.length-1; i>=0; i--) {
     count++;
-    if (count==3) {
+    if (count==3&&i!=0) {
       s.splice(i,0,".");
       count=0;
     }

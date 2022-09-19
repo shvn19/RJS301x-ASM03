@@ -75,6 +75,7 @@ export const DetailPage = () => {
   const handleAddToCart = async () => {
     try{
       dispatch(cartAddProduct(prd,quantity));
+      alert('Products are added to cart');
     } catch (error) {
       console.log('Error when adding or updating cart: ', error);
     }

@@ -47,7 +47,9 @@ const cartSlice = createSlice({
       }
     },
     deleteProductFromCart(state, action){
-      state.cart = state.cart.filter(item => item.product._id.$oid!=action.payload.product._id.$oid);
+      console.log('cart: ', state.cart);
+      console.log('cart: ', action.payload);
+      state.cart = state.cart.filter(item => item.product._id.$oid!=action.payload._id.$oid);
       return state;
     }
   }
@@ -66,7 +68,7 @@ export const cartAddProduct = (product,quantity) => {
 
 export const cartDeleteProduct = (product) => {
   return async (dispatch) => {
-    return await dispatch(cartSlice.actions.deleteProductFromCart(product));
+    await dispatch(cartSlice.actions.deleteProductFromCart(product));
   }
 }
 
