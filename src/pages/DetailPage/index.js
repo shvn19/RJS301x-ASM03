@@ -6,6 +6,7 @@ import { PreviewImages } from "./PreviewImages";
 import styled from 'styled-components';
 import { getAllProductsFunc } from "../../redux/store/products-slice";
 import { RelatedProducts } from "./RelatedProduct";
+import { cartAddProduct } from "../../redux/store/cart-slice";
 
 const InputNoArrow = styled.input`
 ::-webkit-inner-spin-button{
@@ -70,6 +71,16 @@ export const DetailPage = () => {
       return prev+1 ;
     });
   }
+
+  const handleAddToCart = async () => {
+    console.log('start adding ...');
+    try{
+      dispatch(cartAddProduct(prd,quantity));
+    } catch (error) {
+      console.log('Error when adding or updating cart: ', error);
+    }
+  }
+
   return (
     <div className={`px-[100px] py-12`}>
       <div className={`grid grid-cols-2 gap-10`}>
@@ -103,7 +114,7 @@ export const DetailPage = () => {
                 </svg>
               </div>
             </div>
-            <button className="italic bg-color-primary text-white px-4 h-[40px]">Add to cart</button>
+            <button className="italic bg-color-primary text-white px-4 h-[40px]" onClick={handleAddToCart}>Add to cart</button>
           </div>
         </div>}
       </div>
