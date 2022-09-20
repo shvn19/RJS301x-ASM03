@@ -43,7 +43,7 @@ export const TopTrending = () => {
               <p className='text-lg text-slate-500'>{`${priceTransform(prod.price)} VNĐ`}</p>
             </div>)):''}
       </div>
-      {isShowModal&&<PopUp />}
+      {isShowModal&&<PopUp allowScroll={allowScroll} />}
     </>
     
   )

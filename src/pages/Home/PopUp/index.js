@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { priceTransform } from "../../../helpers";
 import useClickOutSide from "../../../hooks/useClickOutSide";
+import useScrollBlock from "../../../hooks/useScrollBlock";
 import { hideModalProduct } from "../../../redux/store/products-slice";
 
 const BackDrop = (props) => {
@@ -16,10 +18,11 @@ const BackDrop = (props) => {
     </div>
   )
 }
-export const PopUp = () => {
+export const PopUp = ({ allowScroll }) => {
   const refModal = useRef();
   const product = useSelector(state => state?.products?.productModal);
   // const isShowModal = useSelector(state => state.products.showModal);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   
   console.log('prod in popup: ', product);
@@ -32,6 +35,11 @@ export const PopUp = () => {
   }
   );
 
+  const handleViewDetail = () => {
+    allowScroll();
+    navigate(`/detail/${product._id.$oid}`);
+  }
+
   return (
       <BackDrop className={`flex justify-center items-center transition duration-500 ease-in`}>
         <div ref={refModal} className={`z-50 grid grid-cols-2 gap-6 max-w-[1000px] max-h-[700px] opacity-100 mx-16 my-16 bg-white items-center p-16 rounded-2xl`} 
@@ -40,8 +48,13 @@ export const PopUp = () => {
           <div className="flex flex-col gap-6 z-50 italic overflow-auto max-h-[592px]">
             <p className="z-[100] font-bold text-3xl text-color-primary">{product.name}</p>
             <p className="z-[100] text-xl text-slate-500">{`${priceTransform(product.price)} VNĐ`}</p>
-            <p className="z-[100] text-lg text-slate-400">{product.long_desc}</p>
-            <button className="text-lg bg-color-primary px-8 py-4 text-white self-start hover:bg-slate-700 transition duration-300 ease-in">View Detail</button>
+            <p className="z-[100] text-lg text-slate-400 whitespace-pre-line">{product.long_desc}</p>
+            <button 
+              className="text-lg bg-color-primary px-8 py-4 text-white self-start hover:bg-slate-700 transition duration-300 ease-in"
+              onClick={handleViewDetail}
+            >
+                View Detail
+            </button>
           </div>
         </div>
       </BackDrop>

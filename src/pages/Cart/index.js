@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
+import { HModal } from "../../components/HModal/hmodal";
 import { priceTransform } from "../../helpers";
 import { cartDeleteProduct } from "../../redux/store/cart-slice";
 import { CartTotal } from "./CartTotal";
@@ -8,10 +10,15 @@ import { Quantity } from "./quantity";
 export const Cart = () => {
   const cartList = useSelector(state => state.cart.cart);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [activePrd, setActivePrd] = useState();
+
   const handleDelete = (prd) => {
     console.log('in handleDelete: ', prd);
-    dispatch(cartDeleteProduct(prd));
+    // dispatch(cartDeleteProduct(prd));
+    setActivePrd(prd);
+    setOpenModal(true);
   }
 
   const handleShopping = () => {
@@ -99,6 +106,30 @@ export const Cart = () => {
           <CartTotal />
         </div>
       </div>
+      {isOpenModal&&
+        <HModal className='p-10' setOpen={setOpenModal}>
+          <p className={`text-xl italic`}>
+            Are you sure to delete this product?
+          </p>
+          <div className={`flex gap-2 justify-end mt-6 `}>
+            <button className="w-[100px] text-white bg-color-primary p-2 cursor-poiter" onClick={() => {
+              dispatch(cartDeleteProduct(activePrd)); 
+              setActivePrd(null);
+              setOpenModal(false);
+              }}
+            >
+              Yes
+            </button>
+            <button className="w-[100px] text-white bg-color-primary p-2 cursor-poiter" onClick={() => {
+              setActivePrd(null);
+              setOpenModal(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+          
+        </HModal>}
     </div>
   )
 }
