@@ -14,8 +14,7 @@ const HBackDrop = (props) => {
     </div>
   )
 }
-export const HModal = (props) => {
-  const { className, children, setOpen } = props;
+export const HModal = ({ className, children, setOpen }) => {
   const refModal = useRef();
   // const product = useSelector(state => state?.products?.productModal);
   const dispatch = useDispatch();

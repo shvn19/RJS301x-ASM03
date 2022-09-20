@@ -39,11 +39,6 @@ export const Cart = () => {
         SHOPPING CART
       </div>
       <div className="grid grid-cols-6 gap-6">
-        {/* <table className="col-span-4">
-          <tr>
-            <th>
-          </tr>
-        </table> */}
         <div className={`col-span-4 grid grid-cols-[repeat(6,auto)]`}>
           <div className={`text-xl italic px-6 py-3 bg-gray-200/50`}>
             IMAGE

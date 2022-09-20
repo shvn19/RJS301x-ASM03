@@ -7,6 +7,7 @@ import { DetailPage } from './pages/DetailPage';
 import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { Cart } from './pages/Cart';
+import { Checkout } from './pages/Cart/Checkout/checkout';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Route path='signup' element={<SignUp /> } />
           <Route path='signin' element={<SignIn /> } />
           <Route path='cart' element={<Cart /> } />
-          <Route path='*' element={<p>Nothing</p>} />
+          <Route path='checkout' element={<Checkout /> } />
+          <Route path='*' element={<p>Couldnt find any route</p>} />
         </Route>
       </Routes>
     </BrowserRouter>
