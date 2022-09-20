@@ -12,7 +12,6 @@ const schema = yup.object().shape({
     function(val, {createError, path}){
       if (val.match(REGEX_EMAIL)
       ) {
-        // console.log('match regex');
         return true;
       } else {
         return createError({
@@ -25,11 +24,8 @@ const schema = yup.object().shape({
   password: yup.string().required('Required password').passwordha('Password has to has:\n- 1 lower case\n- 1 upper case\n- 1 special character\n- and 8 characters length')
   .test('validator-multi-fields', (val,ctx) => {
     if(!ctx.parent.fullName) {
-      // console.log('no fullName from password');
-      console.log('ctx: ', ctx);
       return false;
     }
-    console.log('ctx: ', ctx);
     return true;
   }),
   // phone: yup.string().required('Required Phone').matches(/^[0-9]+$/, "Must be only digits").min(5,"Minimum 5 digits")
@@ -49,7 +45,6 @@ export const SignUp = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    console.log('data submitted: ', data);
     const res = await dispatch(userSignUp(data));
   }
 

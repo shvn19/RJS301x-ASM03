@@ -11,7 +11,6 @@ const schema = yup.object().shape({
     function(val, {createError, path}){
       if (val.match(REGEX_EMAIL)
       ) {
-        // console.log('match regex');
         return true;
       } else {
         return createError({
@@ -37,7 +36,6 @@ export const SignIn = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log('data submitted: ', data);
     await dispatch(userSignIn(data));
     console.log('Sign In successfully!!!');
     navigate("/");

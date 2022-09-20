@@ -6,7 +6,6 @@ export const SearchAndSort = () => {
   const handleSearch = (event) => {
     event.preventDefault();
     const input = event.target[0];
-    console.log('input value: ', input.value);
     dispatch(productsActions.getFilterProductsByName(input.value));
   }
   return (

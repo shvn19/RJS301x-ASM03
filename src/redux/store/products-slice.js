@@ -12,7 +12,6 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     addProducts(state) {
-      console.log('state products: ', state.productsList);
       state.productsList.push(1);
     },
     updateProductsList(state, action) {
@@ -31,7 +30,6 @@ const productsSlice = createSlice({
       state.filteredProducts = [ ...action.payload ];
     },
     getFilterProductsIphone(state, action){
-      console.log('productList: ', state.productsList);
       state.filteredProducts = state.productsList.filter(prod => prod.category.toLowerCase()==='iphone');
     },
     getFilterProductsByName(state, action){
@@ -86,7 +84,6 @@ export const getAllFileredProducts = () => {
 export const getFileredProductsIphone = () => {
   return async (dispatch, getState) => {
     const { productsList } = getState().products;
-    console.log('prdlist: ', productsList);
     if(productsList.length==0) {
       await dispatch(getAllProductsFunc());
     }

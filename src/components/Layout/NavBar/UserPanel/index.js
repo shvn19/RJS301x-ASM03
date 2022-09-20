@@ -21,7 +21,6 @@ export const UserPanel = ({ activeUser }) => {
   }
 
   useClickOutSide(refPanel, () => {
-    console.log('click outside')
     refPanel.current.style.opacity = 0;
     setTimeout(() => {
       setTogglePanel(false);
@@ -31,11 +30,11 @@ export const UserPanel = ({ activeUser }) => {
 
   return (
     <div className="relative flex justify-center items-center cursor-pointer transition duration-500">
-      <div className={`w-full px-4 bg-red-50 inline italic text-xl self-stretch flex items-center `} onClick={handleClick}>
+      <div className={`w-full px-4 inline italic text-xl self-stretch flex items-center `} onClick={handleClick}>
         {activeUser.name}
       </div>
       {togglePanel&&
-        <div className={`absolute z-50 top-full left-0 w-[150px] bg-red-50 px-4 py-2 italic text-lg transition duration-500`} onClick={handleSignOut}
+        <div className={`absolute z-50 top-full left-0 w-[150px] bg-blue-50 px-4 py-2 italic text-lg transition duration-500`} onClick={handleSignOut}
           ref={refPanel}
         >
           Sign Out

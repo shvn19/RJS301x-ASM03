@@ -1,6 +1,5 @@
 export const InputWithLabel = (props) => {
   const { label, labelClassName, inputClassName, placeholder, error, errorClassName, name, register} = props;
-  console.log('register: ', register);
   return (
     <div>
       {label&&

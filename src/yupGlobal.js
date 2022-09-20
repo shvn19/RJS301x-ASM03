@@ -8,7 +8,6 @@ export const REGEX_EMAIL= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 yup.addMethod(yup.string, 'passwordha', function (
   message,
 ) {
-  console.log('into passwordha');
   // return this.matches(REGEX_PASSWORD, {
   //   message,
   //   excludeEmptyString: true,

@@ -10,7 +10,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signin(state,action) {
-      console.log('action: ', action);
       const { sub, email, name, phone } = action.payload.attributes;
       state.activeUser = {
         sub,
@@ -31,12 +30,10 @@ const authSlice = createSlice({
 export const userSignIn = (data) => {
   return async (dispatch) => {
     try {
-      console.log('in signin: data ...', data);
       const res = await Auth.signIn(
         data.email,
         data.password,
       );
-      console.log('signin res: ', res);
       dispatch(authSlice.actions.signin(res));
     } catch (err) {
       console.log('signin error: ', err);
@@ -67,7 +64,6 @@ export const userSignUp = (data) => {
           phone_number: data.phone,
         }
       });
-      console.log('signup res: ', res);
       // dispatch(authSlice.actions.signup(res));
     } catch (err) {
       console.log('signup error: ', err);

@@ -16,7 +16,6 @@ const schema = yup.object().shape({
     function(val, {createError, path}){
       if (val.match(REGEX_EMAIL)
       ) {
-        // console.log('match regex');
         return true;
       } else {
         return createError({

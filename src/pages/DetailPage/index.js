@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { getAllProductsFunc } from "../../redux/store/products-slice";
 import { RelatedProducts } from "./RelatedProduct";
 import { cartAddProduct } from "../../redux/store/cart-slice";
+import useScrollBlock from "../../hooks/useScrollBlock";
+import { HModal } from "../../components/HModal/hmodal";
 
 const InputNoArrow = styled.input`
 ::-webkit-inner-spin-button{
@@ -22,13 +24,13 @@ const InputNoArrow = styled.input`
 export const DetailPage = () => {
   const productId = useParams();
   const [relProducts, setRelProducts] = useState([]);
-  console.log('prid: ', productId.id);
   const [prd, setPrd] = useState();
   let products = useSelector(state => state.products.productsList);
   const dispatch = useDispatch();
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [blockScroll, allowScroll] = useScrollBlock();
   
   const [quantity, setQuantity] = useState(1);
-  console.log('products: ', products);
 
   useEffect(()=> {
     async function fetchData() {
@@ -39,19 +41,13 @@ export const DetailPage = () => {
     if(products.length==0) {
       res= fetchData();
     }
-    console.log('prd: ', products);
     res = products.filter(prod => prod._id.$oid == productId.id);
-    console.log('res:... ');
-    console.log('res: ',res);
     setPrd(res[0]);
   },[dispatch, products]);
 
   useEffect(() => {
-    console.log('product before filter: ', products);
-    console.log('prd: ', prd);
     if (products.length!=0 && prd) {
       const res = products.filter(prod=>prod.category==prd.category);
-      console.log('related products list: ', res);
       setRelProducts(res);
     }
   },[prd, products]);
@@ -75,7 +71,7 @@ export const DetailPage = () => {
   const handleAddToCart = async () => {
     try{
       dispatch(cartAddProduct(prd,quantity));
-      alert('Products are added to cart');
+      setOpenModal(true);
     } catch (error) {
       console.log('Error when adding or updating cart: ', error);
     }
@@ -120,7 +116,7 @@ export const DetailPage = () => {
       </div>
       {/* Description  */}
       <div className={`mt-12 italic flex flex-col gap-6 w-2/3`}>
-        <button className="px-8 py-4 bg-color-primary text-white w-[300px]">Description</button>
+        <button className="px-8 py-4 bg-color-primary text-white w-[300px] cursor-default">Description</button>
         <p className={`text-color-primary`}>
           PRODUCT DESCRIPTION
         </p>
@@ -132,9 +128,25 @@ export const DetailPage = () => {
         <p className={`text-xl font-normal italic`}>
           RELATED PRODUCT
         </p>
-        {console.log('products1: ', products)}
         {relProducts.length!=0 && <RelatedProducts products={relProducts}/> }
       </div>
+      {isOpenModal&&
+        <HModal className="p-8" setOpen={setOpenModal}>
+          <p className={`text-xl italic whitespace-pre-line`}>
+            {"Item(s) are added to cart"}
+          </p>
+          <div className={`flex justify-center mt-16`}>
+            <button className="p-2 bg-color-primary text-white italic w-[150px]" 
+              onClick={()=> {
+                setOpenModal(false);
+                allowScroll();
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </HModal>
+      }
     </div>
   )
 }

@@ -15,8 +15,6 @@ export const Cart = () => {
   const [activePrd, setActivePrd] = useState();
 
   const handleDelete = (prd) => {
-    console.log('in handleDelete: ', prd);
-    // dispatch(cartDeleteProduct(prd));
     setActivePrd(prd);
     setOpenModal(true);
   }

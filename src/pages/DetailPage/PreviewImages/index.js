@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export const PreviewImages = ({ product }) => {
-  console.log('previews: ', product);
   const [selectedImage, setSelectedImage] = useState();
   return (
     <div className={`grid grid-cols-4 gap-2 max-h-[500px]`}>

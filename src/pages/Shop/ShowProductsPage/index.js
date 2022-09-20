@@ -11,21 +11,18 @@ export const ShowProductsPage = () => {
   const counter = useSelector(state=> state.products.counter);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log('list: ', filteredProducts);
 
   useEffect(()=>{
     dispatch(getAllFileredProducts());
   },[]);
 
   const handleClickProduct = (productId) => {
-    console.log('pr: ', productId._id.$oid);
     navigate(`/detail/${productId._id.$oid}`);
   }
   return (
     <div className={`flex flex-col`}>
       <SearchAndSort />
       <div className={`grid grid-cols-3 gap-4 py-6 transition duration-300`}>
-        {console.log('productstest: ', filteredProducts)}
         {filteredProducts?.map((prod, index) => (
           <Transition
             key={index}

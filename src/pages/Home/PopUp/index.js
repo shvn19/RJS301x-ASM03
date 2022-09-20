@@ -21,15 +21,10 @@ const BackDrop = (props) => {
 export const PopUp = ({ allowScroll }) => {
   const refModal = useRef();
   const product = useSelector(state => state?.products?.productModal);
-  // const isShowModal = useSelector(state => state.products.showModal);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-  console.log('prod in popup: ', product);
   const posY = window.scrollY;
-  console.log('window height: ', window.innerHeight);
   useClickOutSide(refModal, ()=>{
-    console.log('ref: ', refModal);
     refModal.current.style.opacity = 0;
     dispatch(hideModalProduct());
   }
