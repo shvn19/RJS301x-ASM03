@@ -45,7 +45,7 @@ export const userSignOut = () => {
   return async (dispatch) => {
     try {
       const res = await Auth.signOut();
-      dispatch(authSlice.actions.signOut())
+      dispatch(authSlice.actions.signout())
     } catch (err) {
       console.log('error signout: ', err);
     }
